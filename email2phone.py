@@ -25,9 +25,13 @@ def makecall(sid, secret, target, from_, url, timeout=10):
 if __name__ == '__main__':
     try:
         gmail = Gmail_checker(ID, PASS)
+        gmail.login()
         while True:
             if gmail.mail_exists(u'まもなく'):
                 makecall(SID, SECRET, TARGET, FROM, URL)
             time.sleep(15)
     except KeyboardInterrupt:
         print('\nbreak')
+
+    finally:
+        gmail.logout()
