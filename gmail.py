@@ -26,6 +26,10 @@ class Gmail_checker(object):
         return datetime.date.fromtimestamp(time_stamp)
 
 
+    def _time_stamp(self):
+        return "{0:%Y-%m-%d %H:%M:%S}".format(datetime.datetime.now())
+
+
     def mail_exists(self, subject_pattern):
         """
         Checck the latest unread specified title email
@@ -34,7 +38,7 @@ class Gmail_checker(object):
 
         try:
             gmail.login(self.user, self.password)
-            print('login')
+            print('login:{0}'.format(self._time_stamp()))
             gmail.select('inbox')
             gmail.select('Schoolbus')
             typ, data = gmail.search(None, '(UNSEEN)')
@@ -62,4 +66,4 @@ class Gmail_checker(object):
         finally:
             gmail.close()
             gmail.logout()
-            print('logout')
+            print('logout:{0}'.format(self._time_stamp()))
