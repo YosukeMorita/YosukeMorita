@@ -37,9 +37,9 @@ class Gmail_checker(object):
 
 
     def logout(self):
-            self.gmail.close()
-            self.gmail.logout()
-            print('logout:{0}'.format(self._time_stamp()))
+        self.gmail.close()
+        self.gmail.logout()
+        print('logout:{0}'.format(self._time_stamp()))
 
 
     def mail_exists(self, subject_pattern):
