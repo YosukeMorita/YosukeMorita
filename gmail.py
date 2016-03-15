@@ -64,14 +64,9 @@ class Gmail_checker(object):
             if msg_date == datetime.date.today():
                 if re.match(subject_pattern, msg_subject):
                     self.gmail.store(id, '+FLAGS', '\\Deleted')
-                    #  self.gmail.store(id, '-X-GM-LABELS', '\Schoolbus')
                     return True
         else:
             return False
-
-
-    def add_label(self, id, label):
-        pass
 
 
     def remove_label(self, id, label):
