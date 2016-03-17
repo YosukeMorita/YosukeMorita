@@ -44,7 +44,7 @@ class Gmail_checker(object):
 
     def mail_exists(self, subject_pattern):
         """
-        Checck the latest unread specified title email
+        Check the latest specified title email
         """
         self.gmail.select('inbox')
         self.gmail.select('Schoolbus')
