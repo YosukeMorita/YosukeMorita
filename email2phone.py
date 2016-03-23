@@ -5,6 +5,7 @@ from twilio.rest import TwilioRestClient
 from twilio import TwilioRestException
 from gmail import Gmail_checker
 from setting import SID, SECRET, TARGET, FROM, ID, PASS, URL
+from logger import logger as log
 
 
 def makecall(sid, secret, target, from_, url, timeout=10):
@@ -17,10 +18,10 @@ def makecall(sid, secret, target, from_, url, timeout=10):
                 timeout=timeout
                 )
 
-        print(call.sid)
+        log.info(call.sid)
 
     except TwilioRestException as e:
-        print(e)
+        log.exception(e)
 
 if __name__ == '__main__':
     try:

@@ -6,6 +6,7 @@ from email.header import decode_header
 from email.utils import parsedate_tz, mktime_tz
 import imaplib
 import datetime
+from logger import logger as log
 
 
 class Gmail_checker(object):
@@ -33,13 +34,14 @@ class Gmail_checker(object):
     def login(self):
         self.gmail = imaplib.IMAP4_SSL(self.imap_host)
         self.gmail.login(self.user, self.password)
-        print('login:{0}'.format(self._time_stamp()))
+        #  print('login:{0}'.format(self._time_stamp()))
+        log.info('login')
 
 
     def logout(self):
         self.gmail.close()
         self.gmail.logout()
-        print('logout:{0}'.format(self._time_stamp()))
+        log.info('logout')
 
 
     def mail_exists(self, subject_pattern):
@@ -50,7 +52,7 @@ class Gmail_checker(object):
         self.gmail.select('Schoolbus')
         typ, data = self.gmail.search(None, '(ALL)')
         ids = data[0].split()
-        print('ids={0} {1}'.format(ids, self._time_stamp()))
+        log.info('ids={0}'.format(ids))
         for id in ids:
             typ, data = self.gmail.fetch(id, '(RFC822)')
             raw_email = data[0][1]
@@ -58,9 +60,9 @@ class Gmail_checker(object):
             _msg_subject = decode_header(msg.get('Subject'))[0][0]
             msg_encoding = decode_header(msg.get('Subject'))[0][1] or self.email_default_encoding
             msg_subject = _msg_subject.decode(msg_encoding)
-            print(msg_subject)
+            log.info(msg_subject)
             msg_date = self._conv_date_format(msg.get('Date'))
-            print(msg_date)
+            log.info(msg_date)
             if msg_date == datetime.date.today():
                 if re.match(subject_pattern, msg_subject):
                     self.remove_label(id)
