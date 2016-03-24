@@ -27,14 +27,9 @@ class Gmail_checker(object):
         return datetime.date.fromtimestamp(time_stamp)
 
 
-    def _time_stamp(self):
-        return "{0:%Y-%m-%d %H:%M:%S}".format(datetime.datetime.now())
-
-
     def login(self):
         self.gmail = imaplib.IMAP4_SSL(self.imap_host)
         self.gmail.login(self.user, self.password)
-        #  print('login:{0}'.format(self._time_stamp()))
         log.info('login')
 
 
