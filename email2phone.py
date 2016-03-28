@@ -3,7 +3,7 @@
 import time
 from twilio.rest import TwilioRestClient
 from twilio import TwilioRestException
-from gmail import Gmail_checker
+from gmail import GmailChecker
 from setting import SID, SECRET, TARGET, FROM, ID, PASS, URL
 from logger import logger as log
 
@@ -25,7 +25,7 @@ def makecall(sid, secret, target, from_, url, timeout=10):
 
 if __name__ == '__main__':
     try:
-        gmail = Gmail_checker(ID, PASS)
+        gmail = GmailChecker(ID, PASS)
         gmail.login()
         while True:
             if gmail.mail_exists(u'まもなく'):

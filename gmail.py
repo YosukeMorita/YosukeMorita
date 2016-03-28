@@ -9,7 +9,7 @@ import datetime
 from logger import logger as log
 
 
-class Gmail_checker(object):
+class GmailChecker(object):
     def __init__(self, user, password):
         self.user = user
         self.password = password
