@@ -1,4 +1,3 @@
-one line to give the program's name and a brief description
 Copyright © 2016 Hirohisa AOSHIMA
 
 Permission is hereby granted, free of charge, to any person obtaining
