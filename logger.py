@@ -1,20 +1,16 @@
 # -*- coding: utf-8 -*-
 
-import logging
+from datetime import datetime
+from functools import wraps
 
-# create logger
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
-
-# create console handler and set level to debug
-ch = logging.StreamHandler()
-ch.setLevel(logging.DEBUG)
-
-# create formatter
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-
-# add formatter to ch
-ch.setFormatter(formatter)
-
-# add ch to logger
-logger.addHandler(ch)
+def logging(func):
+    """A decorator that logs the activity of the script."""
+    @wraps(func)
+    def wrapper(obj, *args, **kwargs):
+        print("{0:%Y-%m-%d %H:%M:%S} {1} {2} {3} args={4} kwds={5}"\
+                .format(datetime.now(), "INFO", func.__qualname__, "START", args, kwargs))
+        result = func(obj, *args, **kwargs)
+        print("{0:%Y-%m-%d %H:%M:%S} {1} {2} {3} return {4}"\
+                .format(datetime.now(), "INFO", func.__qualname__, "END", result))
+        return result
+    return wrapper
